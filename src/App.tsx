@@ -31,42 +31,29 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-
-  if (isHome) return <>{children}</>;
-
-  return (
+const AppContent = () => (
+  <BrowserRouter>
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Navbar />
       <main className="flex-grow relative">
-        {children}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/account-sales" element={<AccountSales />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/clients" element={<OurClients />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
         <WhatsAppButton />
       </main>
       <Footer />
     </div>
-  );
-};
-
-const AppContent = () => (
-  <BrowserRouter>
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
-        <Route path="/account-sales" element={<AccountSales />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/clients" element={<OurClients />} />
-        <Route path="/disclaimer" element={<Disclaimer />} />
-        <Route path="/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Layout>
   </BrowserRouter>
 );
 

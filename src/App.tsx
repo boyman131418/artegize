@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AppProvider, useApp } from "./context/AppContext";
 import Navbar from "./components/Navbar";
@@ -32,7 +32,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 };
 
 const AppContent = () => (
-  <BrowserRouter>
+  <HashRouter>
     <div className="flex flex-col min-h-screen bg-background text-foreground">
       <Navbar />
       <main className="flex-grow relative">
@@ -54,7 +54,7 @@ const AppContent = () => (
       </main>
       <Footer />
     </div>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 const App = () => (
